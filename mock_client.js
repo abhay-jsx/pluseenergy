@@ -2,8 +2,9 @@ const fs = require('fs');
 const mqtt = require('mqtt');
 const csvParser = require('csv-parser');
 const MeterData = require('./src/models/meter.model');
+const config = require('./src/config/config');
 
-const csvFilePath = './meter_values_dump_10k.csv';
+const csvFilePath = config.csvpath;
 const stream = fs.createReadStream(csvFilePath);
 
 const client = mqtt.connect('mqtt://broker.emqx.io:1883');
@@ -19,7 +20,7 @@ client.on('message', async (topic, message) => {
     try {
         const msgObject = JSON.parse(message.toString());
         await sendMessage(msgObject.chargePointId, msgObject.payload);
-        const data = await MeterData.addMeterData({charge_point_id:msgObject.chargePointId, payload:msgObject.payload})
+        await MeterData.addMeterData({charge_point_id:msgObject.chargePointId, payload:msgObject.payload})
     } catch (error) {
         console.error('Error parsing MQTT message:', error);
     }
@@ -66,8 +67,6 @@ async function processChunk(chunk) {
         if (row.charge_point_id) {
             await sendMessage(row.charge_point_id, row.payload);
             await new Promise((innerResolve) => setTimeout(innerResolve, 5000));
-        } else {
-            console.log("empty_row");
         }
     }
 }

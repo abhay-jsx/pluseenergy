@@ -1,33 +1,34 @@
-# kelp-assignment
+# Charging Station Data Server
 
-About the Project:
-This Node.js Express application offers a CSV to JSON converter API. The API takes the path to a CSV file from environment configuration and converts it into JSON format. The JSON data is then interpreted, with fields such as name, age, address, and additional_info. Notably, name and age are mandatory fields.
+This project is a Node.js application that simulates charging station data reception from multiple clients. The received data is stored in a PostgreSQL database, and it provides two API endpoints for retrieving the stored data.
 
-Key Features:
+## Getting Started
 
-* CSV to JSON Conversion: The API reads the specified CSV file and converts its contents into JSON format, with each row representing an object.
+### Prerequisites
 
-* Database Integration: The JSON data is sent to a PG database using a POST request. The database table structure accommodates fields like name, age, address, and additional_info. Name and age are mandatory fields and mapped accordingly.
+Make sure you have the following installed on your machine:
 
-* Age-Wise Distribution: After the data is successfully added to the database, the application calculates the percentage age-wise distribution of all users. It categorizes users into age groups and prints the distribution on the console.
+- Node.js (version v18.17.1)
+- PostgreSQL database
 
+### Installation
 
-# How to Use:
-* Configure the path to the CSV file in the environment configuration.
+1. Clone the repository:
 
-* Start the Express application.
+   ```bash
+   git clone https://github.com/abhay-jsx/pluseenergy.git
 
-* Send a POST request with the CSV data to the appropriate locahost:port/v1/api/convert.
+2. Create .env file like .env.example
 
-* Observe the age-wise distribution report on the console.
+3. npx knex migrate:latest
 
-* This project simplifies the process of converting CSV data into a structured JSON format, storing it in a PG database, and providing insights through age-wise distribution statistics.
+4. run node server
 
-```
+5. run mock client server by nodemon mock_client.js
 
 
 # Setup Codebase
--> setup/create .env file
+-> create .env file
 ```env
 CSV_FILE_PATH=./dumpcsv.csv
 PORT = node-port
@@ -43,5 +44,38 @@ PG_HOST = hostname
 -> npm install
 -> npm start
 
--->>Ready to go
+------->Ready to go
 ```
+
+
+
+# APIs Description
+
+### Detail Endpoint
+Retrieve complete data for a single record.
+###
+Endpoint: /v1/api/get-charge-point-data/:id/:page/:limit
+###
+Method: GET
+###
+Path Parameter:
+###
+id: ID of the record
+
+
+### List Endpoint
+Retrieve data in a paginated format and for specific charge point IDs.
+
+Endpoint: /v1/api/get-charge-list
+##
+Method: POST
+###
+Query Payload:
+###
+page (optional): Page number (default: 1)
+###
+limit (optional): Number of items per page (default: 10)
+###
+ids (optional): list of charge point IDs
+
+

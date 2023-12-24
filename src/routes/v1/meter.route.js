@@ -7,7 +7,7 @@ router
   .post(meterController.getChargePointList);
 
 router
-  .route('/get-charge-point-data')
-  .post(meterController.getChargePointData);
+  .route('/get-charge-point-data/:id/:page/:limit')
+  .get(meterController.getChargePointData);
 
 module.exports = router;
