@@ -77,5 +77,7 @@ page (optional): Page number (default: 1)
 limit (optional): Number of items per page (default: 10)
 ###
 ids (optional): list of charge point IDs
+###
+<img width="545" alt="Screenshot 2023-12-24 at 5 09 34 PM" src="https://github.com/abhay-jsx/pluseenergy/assets/143396142/7cb67e07-1461-4fc1-bbc2-9d23e0109638">
 
 
