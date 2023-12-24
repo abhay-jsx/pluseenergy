@@ -2,7 +2,6 @@ const { Model } = require('objection');
 const knex = require('../db/index');
 
 Model.knex(knex);
-
 class MeterData extends Model {
     static get tableName() {
         return 'meter_data';
@@ -34,7 +33,6 @@ class MeterData extends Model {
         const totalPages = Math.ceil(totalCount.totalCount / pageSize);
 
         return {
-
             page,
             pageSize,
             totalItems: totalCount.totalCount,
@@ -60,7 +58,6 @@ class MeterData extends Model {
         const totalPages = Math.ceil(totalCount.totalCount / pageSize);
 
         return {
-
             page,
             pageSize,
             totalItems: totalCount.totalCount,

@@ -19,6 +19,7 @@ client.on('connect', () => {
 client.on('message', async (topic, message) => {
     try {
         const msgObject = JSON.parse(message.toString());
+        
         await sendMessage(msgObject.chargePointId, msgObject.payload);
         await MeterData.addMeterData({charge_point_id:msgObject.chargePointId, payload:msgObject.payload})
     } catch (error) {
@@ -46,7 +47,6 @@ async function simulateClients() {
         .pipe(csvParser())
         .on('data', (row) => {
             results.push(row);
-
             if (results.length === CHUNK_SIZE) {
                 processChunk(results);
                 results.length = 0;

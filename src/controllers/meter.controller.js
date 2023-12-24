@@ -4,7 +4,6 @@ const catchAsync = require('../utils/catchAsync');
 const { meterService } = require('../services');
 
 const getChargePointList = catchAsync(async (req, res) => {
-  console.log(req.body);
   const jsonArray = await meterService.getChargePointList(req.body);
   if (!jsonArray) {
     throw new ApiError(httpStatus.NOT_FOUND, 'No Meter Reading Found');
@@ -13,7 +12,6 @@ const getChargePointList = catchAsync(async (req, res) => {
 });
 
 const getChargePointData = catchAsync(async (req, res) => {
-  console.log({body:req.params});
   const jsonArray = await meterService.getChargePointData(req.params);
   if (!jsonArray) {
     throw new ApiError(httpStatus.NOT_FOUND, 'No Meter Reading Found');
